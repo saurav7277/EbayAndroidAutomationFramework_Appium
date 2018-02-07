@@ -1,6 +1,8 @@
 package ebayAndroidAutomation.config;
 
 import java.io.IOException;
+import ebayAndroidAutomation.Pages.LoginPage;
+import ebayAndroidAutomation.Pages.WelcomePage;
 
 public interface DeviceInterface {
 

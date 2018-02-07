@@ -2,6 +2,8 @@ package ebayAndroidAutomation.config;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
+import ebayAndroidAutomation.flows.AndroidFlow;
+import ebayAndroidAutomation.flows.iOSFlow;
 
 public class ViewFactory extends CommonAppiumTest{
     private AndroidFlow androidFlow;
