@@ -16,3 +16,4 @@ To Run the TestNG test on iOS and android both in parallel
 
 3.No need to start appium server externally , framework takes case of starting and shutting down the server for you.
 
+

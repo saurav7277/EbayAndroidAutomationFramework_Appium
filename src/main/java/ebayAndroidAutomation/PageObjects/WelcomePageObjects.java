@@ -4,6 +4,6 @@ import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 
 public class WelcomePageObjects {
-    @AndroidFindBy(id = "org.wordpress.android:id/my_site_title_label")
+    @AndroidFindBy(id = "com.ebay.mobile:id/button_sign_in")
     public MobileElement LOGGED_IN_USER;
 }
