@@ -72,4 +72,5 @@ public class CommonAppiumTest {
         return Thread.currentThread().getStackTrace()[2].getMethodName();
     }
 
+
 }

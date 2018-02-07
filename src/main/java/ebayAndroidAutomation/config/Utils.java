@@ -6,8 +6,6 @@ import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.remote.AndroidMobileCapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
-import org.testng.Assert;
-import org.testng.annotations.Test;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import ebayAndroidAutomation.Pages.LoginPage;
@@ -65,14 +63,5 @@ public class Utils {
     @AfterClass public void tearDown() {
         driver.quit();
     }
-    //test case to be debugged individually
-    @Test public void loginWithValidUser() throws InterruptedException, IOException {
-        loginPage = new LoginPage(driver);
-        credentials = new UserCredentials("vodqa@gmail.com", "Hello12345678");
-        boolean userNameLoggedIn =
-                loginPage.enterValidCredentails(credentials.getUserName(), credentials.getPassWord())
-                        .waitForWelcomePage().verifyUserIsLoggedIn();
-        Assert.assertTrue(userNameLoggedIn);
 
-    }
 }
