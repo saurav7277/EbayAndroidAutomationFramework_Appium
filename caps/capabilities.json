@@ -1,0 +1,39 @@
+[
+  {
+    "android": {
+      "platformName": "android",
+      "platformVersion": "7.0",
+      "app": "./build/com.ebay.mobile_v5.17.0.18-117_Android-5.0.apk",
+      "appPackage":"com.ebay.mobile",
+      "appActivity": "com.ebay.mobile.activities.MainActivity",
+      "deviceName": "android",
+      "noSign":true
+    }
+  },
+  {
+    "iOS": {
+      "platformName": "iOS",
+      "app": "./build/",
+      "deviceName": "iPhone",
+      "usePrebuiltWDA":true,
+      "wdaLaunchTimeout":"80000",
+      "wdaConnectionTimeout":"80000",
+      "preventWDAAttachments":true,
+      "clearSystemFiles":true,
+      "shouldUseSingletonTestManager":false,
+      "simpleIsVisibleCheck": true
+    }
+  },
+  {
+    "simulators": [
+      {
+        "deviceName": "iPhone 6s",
+        "OS": "11.0"
+      },
+      {
+        "deviceName": "iPhone 6s",
+        "OS": "11.0"
+      }
+    ]
+  }
+]
