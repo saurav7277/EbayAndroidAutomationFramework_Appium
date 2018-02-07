@@ -6,9 +6,11 @@ import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.remote.AndroidMobileCapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
+import ebayAndroidAutomation.Pages.LoginPage;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -20,6 +22,9 @@ import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
 public class Utils {
+    LoginPage loginPage;
+    UserCredentials credentials;
+
     DesiredCapabilities caps = new DesiredCapabilities();
     public AppiumDriver<MobileElement> driver;
     public static Properties prop = new Properties();
@@ -42,10 +47,10 @@ public class Utils {
     public void androidSetup() throws MalformedURLException {
         caps.setCapability("deviceName", "9111833b");
         caps.setCapability("app", System.getProperty("user.dir") + "/build/com.ebay.mobile_v5.17.0.18-117_Android-5.0.apk.apk");
-        caps.setCapability("package", "");
-        caps.setCapability("appActivity", "");
+        caps.setCapability("package", "com.ebay.mobile");
+        caps.setCapability("appActivity", "com.ebay.mobile.activities.MainActivity");
         caps.setCapability(AndroidMobileCapabilityType.APP_WAIT_ACTIVITY,
-                "");
+                "com.ebay.mobile.activities.MainActivity");
         driver = new AndroidDriver<MobileElement>(new URL("http://127.0.0.1:4723/wd/hub"), caps);
     }
     public void iosSetup() throws MalformedURLException {
@@ -59,5 +64,15 @@ public class Utils {
     }
     @AfterClass public void tearDown() {
         driver.quit();
+    }
+    //test case to be debugged individually
+    @Test public void loginWithValidUser() throws InterruptedException, IOException {
+        loginPage = new LoginPage(driver);
+        credentials = new UserCredentials("vodqa@gmail.com", "Hello12345678");
+        boolean userNameLoggedIn =
+                loginPage.enterValidCredentails(credentials.getUserName(), credentials.getPassWord())
+                        .waitForWelcomePage().verifyUserIsLoggedIn();
+        Assert.assertTrue(userNameLoggedIn);
+
     }
 }

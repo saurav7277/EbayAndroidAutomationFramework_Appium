@@ -9,6 +9,8 @@ import ebayAndroidAutomation.config.ViewFactory;
 import ebayAndroidAutomation.config.DeviceInterface;
 import ebayAndroidAutomation.PageObjects.LoginPageObjects;
 
+import java.io.IOException;
+
 public class LoginPage extends CommonAppiumTest{
     public ViewFactory viewFactory = new ViewFactory(driver);
     public DeviceInterface runnerInfo;
@@ -18,5 +20,9 @@ public class LoginPage extends CommonAppiumTest{
         super(driver);
         PageFactory.initElements(new AppiumFieldDecorator(driver), loginPageObjects);
         runnerInfo = viewFactory.getMobilePlatform(driver.toString().split(":")[0].toString());
+    }
+    public WelcomePage enterValidCredentails(String username, String password) throws IOException, InterruptedException {
+        runnerInfo.login(this, username, password);
+        return new WelcomePage(driver);
     }
 }
