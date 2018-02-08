@@ -1,6 +1,5 @@
 package ebayAndroidAutomation.config;
 
-
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -160,4 +159,3 @@ public class ADB {
         command("adb -s "+ID+" shell kill "+PID);
     }
 }
-
