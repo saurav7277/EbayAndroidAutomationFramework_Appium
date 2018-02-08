@@ -29,6 +29,7 @@ public class CommonAppiumTest {
     }
 
     public void waitForElementToDisAppear(String id) {
+        logger.info("Waiting For element to load="+id);
         WebDriverWait wait = new WebDriverWait(driver, 15);
         wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id(id)));
     }
@@ -40,6 +41,7 @@ public class CommonAppiumTest {
     }
     public boolean isElementPresent(By by) {
         try {
+            logger.info("Whether element is present or not ");
             driver.findElement(by);
             return true;
         } catch (NoSuchElementException e) {
@@ -72,6 +74,7 @@ public class CommonAppiumTest {
         //driver.navigate().back(); //Comes out of edit mode
     }
     public boolean clickButton(MobileElement element){
+        logger.info("Click button or tap on screen");
         new TouchAction(driver).tap(element);
         return true;
     }
