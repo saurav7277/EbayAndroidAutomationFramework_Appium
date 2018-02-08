@@ -2,13 +2,7 @@
 To automate ebay app
 To Run the TestNG test on android
 
-* Platform="android" mvn clean -Dtest=Runner test
-To Run the TestNG test on iOS
-
-* Platform="ios" mvn clean -Dtest=Runner test
-To Run the TestNG test on iOS and android both in parallel
-
-* Platform="both" mvn clean -Dtest=Runner test
+Run sampleItem test case with TestNg or TestNg.xml file
 
 1.Please make sure you have capabilities.json under caps folder.
 
