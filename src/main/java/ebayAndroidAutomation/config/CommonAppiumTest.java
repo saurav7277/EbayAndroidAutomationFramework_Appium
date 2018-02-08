@@ -23,7 +23,8 @@ public class CommonAppiumTest {
     }
 
     public void waitForPageToLoad(WebElement id) {
-        WebDriverWait wait = new WebDriverWait(driver, 15);
+        logger.info("Waiting For element to load="+id);
+        WebDriverWait wait = new WebDriverWait(driver, 20);
         wait.until(ExpectedConditions.elementToBeClickable(id));
     }
 

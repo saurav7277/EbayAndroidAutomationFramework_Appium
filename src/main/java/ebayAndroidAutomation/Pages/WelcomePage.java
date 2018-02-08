@@ -32,7 +32,7 @@ public class WelcomePage {
 
     public void WaitForLoadLogo()
     {
-        commonAppiumTest.waitForPageToLoad(Logo);
+        commonAppiumTest.waitForElement(SignIn);
     }
     public void ClickOnSignIn()
     {

@@ -24,5 +24,11 @@ public class BaseClass {
             System.out.print("Unhandled Exception"+e.getMessage());
         }
     }
+    @AfterClass
+    public void tearDown()
+    {
+        driver.quit();
+    }
+
 
 }

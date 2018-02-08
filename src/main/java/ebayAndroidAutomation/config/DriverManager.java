@@ -39,7 +39,7 @@ public class DriverManager {
     public static AppiumDriver androidSetup() throws MalformedURLException {
         DesiredCapabilities caps = new DesiredCapabilities();
         caps.setCapability("deviceName", "ZY223B3P74");
-        caps.setCapability("app", System.getProperty("user.dir") + "/build/com.ebay.mobile_v5.17.0.18-117_Android-5.0.apk.apk");
+        caps.setCapability("app", System.getProperty("user.dir") + "/build/com.ebay.mobile_v5.17.0.18-117_Android-5.0.apk");
         caps.setCapability("package", "com.ebay.mobile");
         caps.setCapability("appActivity", "com.ebay.mobile.activities.MainActivity");
         caps.setCapability(AndroidMobileCapabilityType.APP_WAIT_ACTIVITY,

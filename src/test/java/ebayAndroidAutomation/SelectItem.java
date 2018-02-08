@@ -1,7 +1,7 @@
 package ebayAndroidAutomation;
 
-import ebayAndroidAutomation.Pages.WelcomePage;
 import org.testng.annotations.Test;
+import ebayAndroidAutomation.Pages.WelcomePage;
 import org.openqa.selenium.support.PageFactory;
 
 public class SelectItem extends BaseClass{
@@ -11,8 +11,9 @@ public class SelectItem extends BaseClass{
     public void SelectItems()
     {
         System.out.println("\n In test");
-        //WelcomePage welcomepage=PageFactory.initElements(driver,WelcomePage.class);
-        //welcomepage.WaitForLoadLogo();
+        WelcomePage welcomepage=PageFactory.initElements(driver,WelcomePage.class);
+        welcomepage.WaitForLoadLogo();
+        welcomepage.ClickOnSignIn();
         //welcomepage.selectItem();
     }
 
