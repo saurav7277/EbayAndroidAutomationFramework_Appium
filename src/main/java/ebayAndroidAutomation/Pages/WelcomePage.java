@@ -3,32 +3,45 @@ package ebayAndroidAutomation.Pages;
 import ebayAndroidAutomation.config.CommonAppiumTest;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
+import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import org.openqa.selenium.support.PageFactory;
-import ebayAndroidAutomation.config.ViewFactory;
-import ebayAndroidAutomation.config.DeviceInterface;
-import ebayAndroidAutomation.PageObjects.WelcomePageObjects;
 
-import java.io.IOException;
+public class WelcomePage {
+    AppiumDriver driver;
+    CommonAppiumTest commonAppiumTest;
 
-public class WelcomePage extends CommonAppiumTest {
-    public ViewFactory viewFactory = new ViewFactory(driver);
-    public DeviceInterface runnerInfo;
-    WelcomePageObjects welcomePageObjects = new WelcomePageObjects();
+    @AndroidFindBy(id = "com.ebay.mobile:id/logo")
+    public  MobileElement Logo;
+    @AndroidFindBy(id = "com.ebay.mobile:id/button_sign_in")
+    public MobileElement SignIn;
 
-    public WelcomePage(AppiumDriver<MobileElement> driver) {
-        super(driver);
-        PageFactory.initElements(new AppiumFieldDecorator(driver), welcomePageObjects);
-        runnerInfo = viewFactory.getMobilePlatform(driver.toString().split(":")[0].toString());
+    @AndroidFindBy(id = "com.ebay.mobile:id/search_box")
+    public MobileElement SearchBox;
+
+    @AndroidFindBy(id = "com.ebay.mobile:id/suggestionList")
+    public MobileElement SuggestionList;
+
+    @AndroidFindBy(xpath = ".//*[@text='Original Terabyte Ultra Slim Wireless Mouse']")
+    public MobileElement ItemToPurchase;
+
+    public WelcomePage(AppiumDriver ldriver)
+    {
+        this.driver=ldriver;
     }
-    public WelcomePage waitForWelcomePage() {
-        runnerInfo.waitForHomePage(this);
-        return new WelcomePage(driver);
 
+    public void WaitForLoadLogo()
+    {
+        commonAppiumTest.waitForPageToLoad(Logo);
     }
-    public boolean verifyUserIsLoggedIn() throws IOException, InterruptedException {
-        //new ScreenShotManager().captureScreenShot("LoggedInUser");
-        Thread.sleep(3000);
-        return welcomePageObjects.LOGGED_IN_USER.isDisplayed();
+    public void ClickOnSignIn()
+    {
+        commonAppiumTest.clickButton(SignIn);
     }
+    public void selectItem()
+    {
+        commonAppiumTest.swipeDown();
+    }
+
+
 }

@@ -6,10 +6,6 @@ import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.remote.AndroidMobileCapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
-import ebayAndroidAutomation.Pages.LoginPage;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -19,22 +15,20 @@ import java.net.URL;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
-public class Utils {
-    LoginPage loginPage;
-    UserCredentials credentials;
+public class DriverManager {
 
-    DesiredCapabilities caps = new DesiredCapabilities();
-    public AppiumDriver<MobileElement> driver;
+
+    public static AppiumDriver driver;
     public static Properties prop = new Properties();
     static InputStream input = null;
-    @BeforeClass
-    public AppiumDriver<MobileElement> getDriver() throws IOException {
+
+    public static AppiumDriver getDriver() throws IOException {
         input = new FileInputStream("property/android.properties");
         prop.load(input);
-        if (prop.getProperty("platform").equals("android")) {
+        if (prop.getProperty("platform").equalsIgnoreCase("android")) {
             androidSetup();
         } else {
-            if (prop.getProperty("platform").equals("ios")) {
+            if (prop.getProperty("platform").equalsIgnoreCase("ios")) {
                 iosSetup();
             }
         }
@@ -42,16 +36,19 @@ public class Utils {
         return driver;
     }
 
-    public void androidSetup() throws MalformedURLException {
-        caps.setCapability("deviceName", "9111833b");
+    public static AppiumDriver androidSetup() throws MalformedURLException {
+        DesiredCapabilities caps = new DesiredCapabilities();
+        caps.setCapability("deviceName", "ZY223B3P74");
         caps.setCapability("app", System.getProperty("user.dir") + "/build/com.ebay.mobile_v5.17.0.18-117_Android-5.0.apk.apk");
         caps.setCapability("package", "com.ebay.mobile");
         caps.setCapability("appActivity", "com.ebay.mobile.activities.MainActivity");
         caps.setCapability(AndroidMobileCapabilityType.APP_WAIT_ACTIVITY,
                 "com.ebay.mobile.activities.MainActivity");
         driver = new AndroidDriver<MobileElement>(new URL("http://127.0.0.1:4723/wd/hub"), caps);
+        return driver;
     }
-    public void iosSetup() throws MalformedURLException {
+    public static AppiumDriver iosSetup() throws MalformedURLException {
+        DesiredCapabilities caps = new DesiredCapabilities();
         File classpathRoot = new File(System.getProperty("user.dir"));
         File appDir = new File(classpathRoot, "/build/");
         File app = new File(appDir, "");
@@ -59,9 +56,8 @@ public class Utils {
         caps.setCapability("deviceName", "iPhone 6");
         caps.setCapability("app", app.getAbsolutePath());
         driver = new IOSDriver<MobileElement>(new URL("http://127.0.0.1:4723/wd/hub"), caps);
+        return driver;
     }
-    @AfterClass public void tearDown() {
-        driver.quit();
-    }
+
 
 }

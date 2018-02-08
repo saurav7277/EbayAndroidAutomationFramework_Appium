@@ -3,6 +3,7 @@ package ebayAndroidAutomation.config;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.TouchAction;
+import io.appium.java_client.android.AndroidDriver;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
@@ -17,7 +18,7 @@ public class CommonAppiumTest {
     public AppiumDriver driver;
     Logger logger = Logger.getLogger(CommonAppiumTest.class);
 
-    public CommonAppiumTest(AppiumDriver<MobileElement> driver) {
+    public CommonAppiumTest(AppiumDriver driver) {
         this.driver = driver;
     }
 
@@ -69,31 +70,13 @@ public class CommonAppiumTest {
         driver.navigate().back(); //Closes keyboard
         //driver.navigate().back(); //Comes out of edit mode
     }
+    public boolean clickButton(MobileElement element){
+        new TouchAction(driver).tap(element);
+        return true;
+    }
 
     public String getCurrentMethodName() {
         return Thread.currentThread().getStackTrace()[2].getMethodName();
-    }
-
-    public void swipeRightUntilLogOutScreen() {
-        do {
-            swipeRight();
-        } while (!isElementPresent(By.id("org.wordpress.android:id/me_login_logout_text_view")));
-    }
-
-    public boolean isElementPresent(By by) {
-        try {
-            driver.findElement(by);
-            return true;
-        } catch (NoSuchElementException e) {
-            return false;
-        }
-
-    }
-
-    public void swipeLeftUntilTextExists(String expected) {
-        do {
-            swipeLeft();
-        } while (!driver.getPageSource().contains(expected));
     }
 
     public void swipeRight() {
@@ -101,6 +84,7 @@ public class CommonAppiumTest {
         int startx = (int) (size.width * 0.9);
         int endx = (int) (size.width * 0.20);
         int starty = size.height / 2;
+
         new TouchAction(driver).press(startx, starty)
                 .waitAction(Duration.ofSeconds(2))
                 .moveTo(endx,starty).release().perform();
@@ -115,5 +99,28 @@ public class CommonAppiumTest {
                 .waitAction(Duration.ofSeconds(3000))
                 .moveTo(endx,starty).release();
     }
+
+    public boolean swipeDown() {
+        Dimension size = driver.manage().window().getSize();
+        int startx = (int) (size.width * 0.7);
+        int endx = (int) (size.width * 0.20);
+        int starty = size.width / 2;
+        new TouchAction(driver).press(startx, starty)
+                .waitAction(Duration.ofSeconds(2))
+                .moveTo(endx,starty).release().perform();
+        return true;
+    }
+
+    public boolean swipeUp() {
+        Dimension size = driver.manage().window().getSize();
+        int startx = (int) (size.width * 0.7);
+        int endx = (int) (size.width * 0.20);
+        int starty = size.width / 2;
+        new TouchAction(driver).press(startx, starty)
+                .waitAction(Duration.ofSeconds(2))
+                .moveTo(endx,starty).release().perform();
+        return true;
+    }
+
 
 }
