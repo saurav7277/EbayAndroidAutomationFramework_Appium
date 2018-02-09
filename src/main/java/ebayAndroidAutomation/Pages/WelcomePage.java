@@ -3,13 +3,19 @@ package ebayAndroidAutomation.Pages;
 import ebayAndroidAutomation.config.CommonAppiumTest;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
+import io.appium.java_client.TouchAction;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import org.openqa.selenium.support.PageFactory;
+import org.apache.log4j.Logger;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.util.concurrent.TimeUnit;
 
 public class WelcomePage {
     AppiumDriver driver;
-    CommonAppiumTest commonAppiumTest;
+    Logger logger = Logger.getLogger(WelcomePage.class);
 
     @AndroidFindBy(id = "com.ebay.mobile:id/logo")
     public  MobileElement Logo;
@@ -22,7 +28,9 @@ public class WelcomePage {
     @AndroidFindBy(id = "com.ebay.mobile:id/suggestionList")
     public MobileElement SuggestionList;
 
-    @AndroidFindBy(xpath = ".//*[@text='Original Terabyte Ultra Slim Wireless Mouse']")
+    @AndroidFindBy(id="com.ebay.mobile:id/textview_deals")
+    public  MobileElement FeaturedDeals;
+    @AndroidFindBy(id="com.ebay.mobile:id/card_item_1")
     public MobileElement ItemToPurchase;
 
     public WelcomePage(AppiumDriver ldriver)
@@ -30,17 +38,38 @@ public class WelcomePage {
         this.driver=ldriver;
     }
 
-    public void WaitForLoadLogo()
+    public void waitForAppToLoadLogo()
     {
-        commonAppiumTest.waitForElement(SignIn);
+            logger.info("Waiting for App to load");
+        WebDriverWait wait = new WebDriverWait(driver, 30);
+        wait.until(ExpectedConditions.elementToBeClickable(FeaturedDeals));
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        logger.info("App to loaded successfully");
+
+    }
+    public void SearchBox()
+    {
+        logger.info("Click button or tap on screen");
+        try {
+            //new TouchAction(driver).perform().tap(SearchBox);
+            new TouchAction(driver).perform().press(SearchBox);
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        logger.info("Search button clicked");
     }
     public void ClickOnSignIn()
     {
-        commonAppiumTest.clickButton(SignIn);
+
     }
     public void selectItem()
     {
-        commonAppiumTest.swipeDown();
+
     }
 
 

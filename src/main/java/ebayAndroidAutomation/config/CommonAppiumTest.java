@@ -3,7 +3,6 @@ package ebayAndroidAutomation.config;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.TouchAction;
-import io.appium.java_client.android.AndroidDriver;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
@@ -24,8 +23,17 @@ public class CommonAppiumTest {
 
     public void waitForPageToLoad(WebElement id) {
         logger.info("Waiting For element to load="+id);
+
         WebDriverWait wait = new WebDriverWait(driver, 20);
         wait.until(ExpectedConditions.elementToBeClickable(id));
+    }
+    public void WaitAppToLoad()
+    {
+        try {
+            driver.wait(20);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     public void waitForElementToDisAppear(String id) {
