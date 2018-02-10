@@ -1,8 +1,11 @@
 package ebayAndroidAutomation;
 
+import ebayAndroidAutomation.config.CommonAppiumTest;
 import ebayAndroidAutomation.config.DriverManager;
 import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
+import org.openqa.selenium.Alert;
 import org.testng.annotations.Test;
 import ebayAndroidAutomation.Pages.WelcomePage;
 import org.openqa.selenium.support.PageFactory;
@@ -13,7 +16,8 @@ public class SelectItem{
 
     DriverManager driverManager;
     WelcomePage welcomepage;
-    AppiumDriver driver;
+    AndroidDriver driver;
+    CommonAppiumTest commonAppiumTest;
 
 
     @Test
@@ -25,8 +29,14 @@ public class SelectItem{
         PageFactory.initElements(new AppiumFieldDecorator(driver),welcomepage);
         welcomepage.waitForAppToLoadLogo();
         welcomepage.SearchBox();
+        welcomepage.SearchItemFromSearchBox();
         //welcomepage.ClickOnSignIn();
-        //welcomepage.selectItem();
+        //Alert alert=driver.switchTo().alert();
+        //alert.dismiss();
+        //commonAppiumTest.setContext();
+
+
+
     }
 
 }

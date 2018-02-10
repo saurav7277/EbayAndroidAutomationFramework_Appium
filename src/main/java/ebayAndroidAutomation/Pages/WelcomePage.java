@@ -1,39 +1,34 @@
 package ebayAndroidAutomation.Pages;
 
-import ebayAndroidAutomation.config.CommonAppiumTest;
-import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileElement;
-import io.appium.java_client.TouchAction;
+import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.android.AndroidKeyCode;
 import io.appium.java_client.pagefactory.AndroidFindBy;
-import io.appium.java_client.pagefactory.AppiumFieldDecorator;
-import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.WebElement;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.util.concurrent.TimeUnit;
+import static ebayAndroidAutomation.config.DriverManager.prop;
 
 public class WelcomePage {
-    AppiumDriver driver;
+    AndroidDriver driver;
     Logger logger = Logger.getLogger(WelcomePage.class);
 
-    @AndroidFindBy(id = "com.ebay.mobile:id/logo")
-    public  MobileElement Logo;
+
     @AndroidFindBy(id = "com.ebay.mobile:id/button_sign_in")
-    public MobileElement SignIn;
+    public WebElement SignIn;
 
     @AndroidFindBy(id = "com.ebay.mobile:id/search_box")
-    public MobileElement SearchBox;
+    public WebElement SearchBox;
 
-    @AndroidFindBy(id = "com.ebay.mobile:id/suggestionList")
-    public MobileElement SuggestionList;
+    @AndroidFindBy(id="com.ebay.mobile:id/search_src_text")
+    public WebElement SearchInText;
+
 
     @AndroidFindBy(id="com.ebay.mobile:id/textview_deals")
-    public  MobileElement FeaturedDeals;
-    @AndroidFindBy(id="com.ebay.mobile:id/card_item_1")
-    public MobileElement ItemToPurchase;
+    public  WebElement FeaturedDeals;
 
-    public WelcomePage(AppiumDriver ldriver)
+
+    public WelcomePage(AndroidDriver ldriver)
     {
         this.driver=ldriver;
     }
@@ -55,8 +50,7 @@ public class WelcomePage {
     {
         logger.info("Click button or tap on screen");
         try {
-            //new TouchAction(driver).perform().tap(SearchBox);
-            new TouchAction(driver).perform().press(SearchBox);
+            SearchBox.click();
             Thread.sleep(5000);
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -65,11 +59,26 @@ public class WelcomePage {
     }
     public void ClickOnSignIn()
     {
-
+        logger.info("Click on Sign in button");
+        try {
+            SignIn.click();
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        logger.info("Click on Sign in button");
     }
-    public void selectItem()
+    public void SearchItemFromSearchBox()
     {
-
+        logger.info("In search bar searching the Item for purchase");
+        SearchInText.sendKeys(prop.getProperty("SearchItemForPurchase"));
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        //driver.pressKeyCode(AndroidKeyCode.KEYCODE_PAGE_DOWN);
+        driver.pressKeyCode(AndroidKeyCode.ENTER);
     }
 
 

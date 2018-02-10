@@ -16,7 +16,7 @@ import org.apache.poi.ss.usermodel.Workbook;
 public class ExcelDataProvider {
 
 
-    public  static String filepath="~/DataSource/TestSheet.xlsx";
+    public  static String filepath="~/DataSource/TestSheet.xls";
     public  FileInputStream fis = null;
     public  FileOutputStream fout =null;
     public static Workbook wb;
