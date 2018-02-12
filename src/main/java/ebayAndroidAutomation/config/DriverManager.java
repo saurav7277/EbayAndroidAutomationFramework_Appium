@@ -1,9 +1,7 @@
 package ebayAndroidAutomation.config;
 
-import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
-import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.remote.AndroidMobileCapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import java.io.File;
@@ -22,14 +20,31 @@ public class DriverManager {
     public static AndroidDriver driver;
     public static Properties prop = new Properties();
     static InputStream input = null;
-    ADB adb;
     static Logger logger = Logger.getLogger(DriverManager.class);
+
 
     public static AndroidDriver getDriver() throws IOException {
         input = new FileInputStream("property/android.properties");
         prop.load(input);
         if (prop.getProperty("platform").equalsIgnoreCase("android")) {
             logger.info("Device property found for Android ");
+            ADB adbdriver=new ADB(prop.getProperty("DeviceID"));
+            logger.info("Checking is App already installed");
+            boolean result=adbdriver.isAppAlradyInstalled(prop.getProperty("Package"));
+            if(result==true){
+                logger.info("App is alredy installed clearing content");
+                adbdriver.clearAppsData(prop.getProperty("Package"));
+            }
+            else{
+                logger.info("App was not installed on device. Installing App");
+                adbdriver.installApp(System.getProperty("user.dir")+ "build/com.ebay.mobile_v5.17.0.18-117_Android-5.0.apk",prop.getProperty("Package"));
+                try {
+                    Thread.sleep(15000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                logger.info("App Installed Succesfully");
+            }
             androidSetup();
 
         } else {
@@ -45,12 +60,13 @@ public class DriverManager {
     public static AndroidDriver androidSetup() throws MalformedURLException {
         logger.info("Setting Android Driver");
         DesiredCapabilities caps = new DesiredCapabilities();
-        caps.setCapability("deviceName", "ZY223B3P74");
+        caps.setCapability("deviceName", prop.getProperty("DeviceID"));
         caps.setCapability("app", System.getProperty("user.dir") + "/build/com.ebay.mobile_v5.17.0.18-117_Android-5.0.apk");
         caps.setCapability("package", "com.ebay.mobile");
         caps.setCapability("appActivity", "com.ebay.mobile.activities.MainActivity");
         caps.setCapability(AndroidMobileCapabilityType.APP_WAIT_ACTIVITY,
                 "com.ebay.mobile.activities.MainActivity");
+        caps.setCapability("newCommandTimeout", 10000);
         driver = new AndroidDriver<MobileElement>(new URL("http://127.0.0.1:4723/wd/hub"), caps);
         logger.info("Android Driver set succesfully");
         return driver;

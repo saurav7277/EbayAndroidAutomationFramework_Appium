@@ -36,6 +36,23 @@ public class ADB {
         return devices;
     }
 
+    public static boolean isAppAlradyInstalled(String Package)
+    {
+        Boolean appstatus=false;
+
+        String output=command("adb shell pm list packages | grep"+ Package);
+        System.out.print("#########Output="+Package+"====");
+        if(output.length()==0){
+            System.out.println("Status="+appstatus);
+            return appstatus;
+        }
+        else
+        {
+            appstatus=true;
+            System.out.println("Status="+appstatus);
+            return appstatus;
+        }
+    }
     public String getForegroundActivity(){
         return command("adb -s "+ID+" shell dumpsys window windows | grep mCurrentFocus");
     }
@@ -69,8 +86,11 @@ public class ADB {
         command("adb -s "+ID+" shell am force-stop "+packageID);
     }
 
-    public void installApp(String apkPath){
+    public void installApp(String apkPath,String packageName){
         command("adb -s "+ID+" install "+apkPath);
+        command("adb shell pm grant"+packageName+"android.permission.CAMERA");
+        command("adb shell pm grant"+packageName+"android.permission.STORAGE");
+        command("adb shell pm grant"+packageName+"android.permission.INTERNET");
     }
 
     public void uninstallApp(String packageID){

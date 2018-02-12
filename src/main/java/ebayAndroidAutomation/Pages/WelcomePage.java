@@ -1,37 +1,29 @@
 package ebayAndroidAutomation.Pages;
 
+import ebayAndroidAutomation.config.ScrollElement;
+import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
-import io.appium.java_client.android.AndroidKeyCode;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import org.openqa.selenium.WebElement;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import static ebayAndroidAutomation.config.DriverManager.prop;
 
 public class WelcomePage {
     AndroidDriver driver;
+    ScrollElement scrollElement;
     Logger logger = Logger.getLogger(WelcomePage.class);
-
-
-    @AndroidFindBy(id = "com.ebay.mobile:id/button_sign_in")
-    public WebElement SignIn;
-
-    @AndroidFindBy(id = "com.ebay.mobile:id/search_box")
-    public WebElement SearchBox;
-
-    @AndroidFindBy(id="com.ebay.mobile:id/search_src_text")
-    public WebElement SearchInText;
-
-
-    @AndroidFindBy(id="com.ebay.mobile:id/textview_deals")
-    public  WebElement FeaturedDeals;
-
-
     public WelcomePage(AndroidDriver ldriver)
     {
         this.driver=ldriver;
     }
+
+    @AndroidFindBy(id = "com.ebay.mobile:id/button_sign_in")
+    public WebElement SignInWelcomePage;
+
+    @AndroidFindBy(id="com.ebay.mobile:id/textview_deals")
+    public  WebElement FeaturedDeals;
+
 
     public void waitForAppToLoadLogo()
     {
@@ -46,39 +38,18 @@ public class WelcomePage {
         logger.info("App to loaded successfully");
 
     }
-    public void SearchBox()
-    {
-        logger.info("Click button or tap on screen");
-        try {
-            SearchBox.click();
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        logger.info("Search button clicked");
-    }
-    public void ClickOnSignIn()
+
+    public LoginPage ClickOnSignIn()
     {
         logger.info("Click on Sign in button");
         try {
-            SignIn.click();
+            SignInWelcomePage.click();
             Thread.sleep(5000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        logger.info("Click on Sign in button");
-    }
-    public void SearchItemFromSearchBox()
-    {
-        logger.info("In search bar searching the Item for purchase");
-        SearchInText.sendKeys(prop.getProperty("SearchItemForPurchase"));
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        //driver.pressKeyCode(AndroidKeyCode.KEYCODE_PAGE_DOWN);
-        driver.pressKeyCode(AndroidKeyCode.ENTER);
+        logger.info("Clicked on Sign in button");
+        return new LoginPage(driver);
     }
 
 

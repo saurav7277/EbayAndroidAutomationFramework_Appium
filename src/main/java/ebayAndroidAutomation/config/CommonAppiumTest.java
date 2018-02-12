@@ -33,6 +33,21 @@ public class CommonAppiumTest {
             e.printStackTrace();
         }
     }
+    public void GetCurrentRotation()
+    {
+        logger.info("Current rotation of screen is ="+driver.getOrientation());
+
+    }
+    public void SetRotationPortait()
+    {
+        logger.info("Current rotation set to PORTRAIT=");
+        driver.rotate(ScreenOrientation.PORTRAIT);
+    }
+    public void SetRotationLandscape()
+    {
+        logger.info("Current rotation set to PORTRAIT=");
+        driver.rotate(ScreenOrientation.LANDSCAPE);
+    }
 
     public void waitForElementToDisAppear(String id) {
         logger.info("Waiting For element to load="+id);
