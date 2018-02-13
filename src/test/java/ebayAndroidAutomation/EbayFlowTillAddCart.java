@@ -40,8 +40,7 @@ public class EbayFlowTillAddCart extends BaseClass{
         test.info("Clicking on Sign in Button");
         welcomepage.ClickOnSignIn();
         //Assert.assertTrue(status);
-
-       /* loginPage=new LoginPage(driver);
+       loginPage=new LoginPage(driver);
         PageFactory.initElements(new AppiumFieldDecorator(driver),loginPage);
         test.info("Performing login action");
         loginPage.LoginInApp();
@@ -54,8 +53,7 @@ public class EbayFlowTillAddCart extends BaseClass{
         addProductToCart.SearchItemFromSearchBox();
         test.info("Add product to cart");
         addProductToCart.SelectProduct();
-        test.info("Product Added in Cart sucessfully");*/
-
+        test.info("Product Added in Cart sucessfully");
     }
 
 }
