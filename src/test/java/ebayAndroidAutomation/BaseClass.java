@@ -42,23 +42,6 @@ public class BaseClass {
         }
     }
     @AfterClass
-    public void getResult(ITestResult result)
-    {
-        if(result.getStatus() == ITestResult.FAILURE)
-        {
-            test.log(Status.FAIL, MarkupHelper.createLabel(result.getName()+" Test case FAILED due to below issues:", ExtentColor.RED));
-            test.fail(result.getThrowable());
-        }
-        else if(result.getStatus() == ITestResult.SUCCESS)
-        {
-            test.log(Status.PASS, MarkupHelper.createLabel(result.getName()+" Test Case PASSED", ExtentColor.GREEN));
-        }
-        else
-        {
-            test.log(Status.SKIP, MarkupHelper.createLabel(result.getName()+" Test Case SKIPPED", ExtentColor.ORANGE));
-            test.skip(result.getThrowable());
-        }
-    }
     public void tearDown()
     {
         driver.quit();

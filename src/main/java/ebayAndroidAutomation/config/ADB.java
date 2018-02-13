@@ -41,9 +41,9 @@ public class ADB {
         Boolean appstatus=false;
 
         String output=command("adb shell pm list packages | grep"+ Package);
-        System.out.print("#########Output="+Package+"====");
+        //System.out.print("#########Output="+Package+"====");
         if(output.length()==0){
-            System.out.println("Status="+appstatus);
+           // System.out.println("Status="+appstatus);
             return appstatus;
         }
         else

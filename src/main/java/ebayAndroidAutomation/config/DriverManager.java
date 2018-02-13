@@ -29,15 +29,13 @@ public class DriverManager {
         if (prop.getProperty("platform").equalsIgnoreCase("android")) {
             logger.info("Device property found for Android ");
             ADB adbdriver=new ADB(prop.getProperty("DeviceID"));
-            logger.info("Checking is App already installed");
             boolean result=adbdriver.isAppAlradyInstalled(prop.getProperty("Package"));
             if(result==true){
                 logger.info("App is alredy installed clearing content");
                 adbdriver.clearAppsData(prop.getProperty("Package"));
             }
             else{
-                logger.info("App was not installed on device. Installing App");
-                adbdriver.installApp(System.getProperty("user.dir")+ "build/com.ebay.mobile_v5.17.0.18-117_Android-5.0.apk",prop.getProperty("Package"));
+                adbdriver.installApp(System.getProperty("user.dir")+ prop.getProperty("AppPath"),prop.getProperty("Package"));
                 try {
                     Thread.sleep(15000);
                 } catch (InterruptedException e) {
@@ -61,11 +59,10 @@ public class DriverManager {
         logger.info("Setting Android Driver");
         DesiredCapabilities caps = new DesiredCapabilities();
         caps.setCapability("deviceName", prop.getProperty("DeviceID"));
-        caps.setCapability("app", System.getProperty("user.dir") + "/build/com.ebay.mobile_v5.17.0.18-117_Android-5.0.apk");
-        caps.setCapability("package", "com.ebay.mobile");
-        caps.setCapability("appActivity", "com.ebay.mobile.activities.MainActivity");
-        caps.setCapability(AndroidMobileCapabilityType.APP_WAIT_ACTIVITY,
-                "com.ebay.mobile.activities.MainActivity");
+        caps.setCapability("app", System.getProperty("user.dir") + prop.getProperty("AppPath"));
+        caps.setCapability("package", prop.getProperty("Package"));
+        caps.setCapability("appActivity", prop.getProperty("Activity"));
+        caps.setCapability(AndroidMobileCapabilityType.APP_WAIT_ACTIVITY, prop.getProperty("Activity"));
         caps.setCapability("newCommandTimeout", 10000);
         driver = new AndroidDriver<MobileElement>(new URL("http://127.0.0.1:4723/wd/hub"), caps);
         logger.info("Android Driver set succesfully");
