@@ -16,7 +16,7 @@ import org.apache.poi.ss.usermodel.Workbook;
 public class ExcelDataProvider {
 
 
-    public  String filepath="/Users/suraj/repo/ebayAndroidAutomation/DataSource/TestSheet.xls";
+    public  String filepath=System.getProperty("user.dir")+"/DataSource/TestSheet.xls";
     public  FileInputStream fis = null;
     public  FileOutputStream fout =null;
     public static Workbook wb;
