@@ -6,7 +6,19 @@
   <groupId>ebayAndroidAutomation</groupId>
   <artifactId>ebayAndroidAutomation</artifactId>
   <version>1.0-SNAPSHOT</version>
-  <packaging>jar</packaging>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>8</source>
+                    <target>8</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+    <packaging>jar</packaging>
 
   <name>ebayAndroidAutomation</name>
   <url>http://maven.apache.org</url>
@@ -20,13 +32,12 @@
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
       <version>3.8.1</version>
-      <scope>test</scope>
+
     </dependency>
     <dependency>
       <groupId>org.testng</groupId>
       <artifactId>testng</artifactId>
       <version>6.13.1</version>
-      <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.seleniumhq.selenium</groupId>
@@ -36,18 +47,20 @@
     <dependency>
       <groupId>io.appium</groupId>
       <artifactId>java-client</artifactId>
-      <version>5.0.4</version>
+      <version>9.1.0</version>
     </dependency>
     <dependency>
       <groupId>log4j</groupId>
       <artifactId>log4j</artifactId>
       <version>LATEST</version>
     </dependency>
+    <!-- https://mvnrepository.com/artifact/com.aventstack/extentreports -->
     <dependency>
       <groupId>com.aventstack</groupId>
       <artifactId>extentreports</artifactId>
       <version>3.1.2</version>
     </dependency>
+
     <!-- JSON dependancy-->
     <dependency>
       <groupId>com.googlecode.json-simple</groupId>
@@ -80,5 +93,7 @@
       <artifactId>testng</artifactId>
       <version>6.8</version>
     </dependency>
+
   </dependencies>
+
 </project>

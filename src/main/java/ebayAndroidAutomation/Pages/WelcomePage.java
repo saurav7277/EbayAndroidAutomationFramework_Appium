@@ -1,55 +1,46 @@
-package ebayAndroidAutomation.Pages;
+package ebayAndroidAutomation.pages;
 
-import ebayAndroidAutomation.config.ScrollElement;
-import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
-import io.appium.java_client.pagefactory.AndroidFindBy;
-import org.openqa.selenium.WebElement;
 import org.apache.log4j.Logger;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
+
 public class WelcomePage {
     AndroidDriver driver;
-    ScrollElement scrollElement;
     Logger logger = Logger.getLogger(WelcomePage.class);
     public WelcomePage(AndroidDriver ldriver)
     {
         this.driver=ldriver;
+        PageFactory.initElements(driver,this);
     }
 
-    @AndroidFindBy(id = "com.ebay.mobile:id/button_sign_in")
+    @FindBy(id = "com.ebay.mobile:id/button_classic")
     public WebElement SignInWelcomePage;
 
-    @AndroidFindBy(id="com.ebay.mobile:id/textview_deals")
-    public  WebElement FeaturedDeals;
+    @FindBy(id="com.ebay.mobile:id/identity_app_onboarding_screen_close")
+    public  WebElement crossButton;
 
 
-    public void waitForAppToLoadLogo()
+    public void waitForAppToLoad()
     {
-            logger.info("Waiting for App to load");
-        WebDriverWait wait = new WebDriverWait(driver, 30);
-        wait.until(ExpectedConditions.elementToBeClickable(FeaturedDeals));
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        logger.info("Waiting for App to load");
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.ebay.mobile:id/identity_app_onboarding_logo")));
         logger.info("App to loaded successfully");
 
     }
 
-    public LoginPage ClickOnSignIn()
+    public void clickOnSignInPopupCrossButton()
     {
-        logger.info("Click on Sign in button");
-        try {
-            SignInWelcomePage.click();
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        logger.info("Clicked on Sign in button");
-        return new LoginPage(driver);
+        logger.info("Click on Sign In Popup Cross Button");
+        crossButton.click();
+        logger.info("Clicked on Sign In Popup Cross Button");
     }
 
 

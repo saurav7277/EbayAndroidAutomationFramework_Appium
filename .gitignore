@@ -12,6 +12,8 @@ src/test/java/output/*.java
 .DS_Store
 .AppleDouble
 .LSOverride
+*.apk
+
 
 # Icon must end with two \r
 Icon
