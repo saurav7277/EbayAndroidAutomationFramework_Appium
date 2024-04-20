@@ -24,7 +24,7 @@ public class EbayAutomation extends BaseClass {
 
     @BeforeClass
     public void beforeClass() throws IOException {
-        driver=DriverManager.getDriver();
+        driver=DriverManager.getDriverInstance();
         welcomepage = new WelcomePage(driver);
         loginPage = new SignInPage(driver);
         homePage= new HomePage(driver);

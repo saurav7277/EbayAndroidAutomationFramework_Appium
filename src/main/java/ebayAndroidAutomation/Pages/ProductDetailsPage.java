@@ -26,7 +26,7 @@ public class ProductDetailsPage {
 
 
     public void addToWatchList(){
-        AppiumUtil.waitForElement(itemShareButton);
+        AppiumUtil.waitForElement(driver, itemShareButton);
         AppiumUtil.ScrollToElement(driver, addToWatchList.getText());
         addToWatchList.click();
     }

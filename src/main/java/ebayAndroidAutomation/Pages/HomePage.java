@@ -27,9 +27,9 @@ public class HomePage {
 
     public void searchItem(String itemToSearch) {
         logger.info("In search bar searching the Item for purchase");
-        AppiumUtil.waitForElement(searchBox);
+        AppiumUtil.waitForElement(driver, searchBox);
         searchBox.click();
-        AppiumUtil.waitForElement(searchInText);
+        AppiumUtil.waitForElement(driver, searchInText);
         searchInText.sendKeys(itemToSearch);
         driver.executeScript("mobile: performEditorAction", ImmutableMap.of("action", "search"));
     }
