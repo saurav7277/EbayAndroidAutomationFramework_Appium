@@ -47,9 +47,9 @@ public class SearchResultPage {
 
 
     public void sortItemsByPrice(String sortType){
-        AppiumUtil.waitForElement(saveThisSearchTextPopup);
+        AppiumUtil.waitForElement(driver, saveThisSearchTextPopup);
         saveThisSearchTextPopup.click();
-        AppiumUtil.waitForElement(sortButton);
+        AppiumUtil.waitForElement(driver, sortButton);
         sortButton.click();
         switch (sortType){
             case "LOW_TO_HIGH":
@@ -93,7 +93,7 @@ public class SearchResultPage {
     }
 
     public void clickFirstProductFromSearchResult(){
-        AppiumUtil.waitForElement(firstItemFromSearchResult);
+        AppiumUtil.waitForElement(driver, firstItemFromSearchResult);
         firstItemFromSearchResult.click();
 
     }

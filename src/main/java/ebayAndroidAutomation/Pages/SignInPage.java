@@ -30,7 +30,7 @@ public class SignInPage {
     private WebElement closeSignInButton;
 
     public void verifyIfSignInPageDisplayed(){
-        AppiumUtil.waitForElement(signInText);
+        AppiumUtil.waitForElement(driver, signInText);
         Assert.assertTrue(signInText.isDisplayed(), "SignIn page not displayed");
     }
 

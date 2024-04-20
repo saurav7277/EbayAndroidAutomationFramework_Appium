@@ -23,7 +23,7 @@ public class AppiumUtil {
         this.driver = driver;
     }
 
-    public static void waitForPageToLoad(WebElement id) {
+    public static void waitForPageToLoad(AndroidDriver driver, WebElement id) {
         logger.info("Waiting For element to load=" + id);
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
@@ -37,8 +37,8 @@ public class AppiumUtil {
 
     }
 
-    public static WebElement waitForElement(WebElement arg) {
-        waitForPageToLoad(arg);
+    public static WebElement waitForElement(AndroidDriver driver, WebElement arg) {
+        waitForPageToLoad(driver, arg);
         WebElement el = arg;
         return el;
     }
